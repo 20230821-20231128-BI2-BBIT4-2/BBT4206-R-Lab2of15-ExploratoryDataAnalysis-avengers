@@ -110,7 +110,7 @@ install.packages("readr")
     ## 
     ## # Installing packages --------------------------------------------------------
     ## - Installing readr ...                          OK [linked from cache]
-    ## Successfully installed 1 package in 28 milliseconds.
+    ## Successfully installed 1 package in 36 milliseconds.
 
 ``` r
 library(readr)
@@ -1041,23 +1041,6 @@ ggplot(student_performance_dataset, aes(x = gender, y = `A - 1. I am enjoying th
 renv::snapshot()
 ```
 
-    ## The following package(s) will be updated in the lockfile:
-    ## 
-    ## # CRAN -----------------------------------------------------------------------
-    ## - dplyr           [1.1.2 -> 1.1.3]
-    ## - ggcorrplot      [0.1.4 -> 0.1.4.1]
-    ## - KernSmooth      [2.23-22 -> 2.23-21]
-    ## - knitr           [1.43 -> 1.44]
-    ## - Matrix          [1.6-1 -> 1.5-4.1]
-    ## - mgcv            [1.9-0 -> 1.8-42]
-    ## - nlme            [3.1-163 -> 3.1-162]
-    ## - pkgload         [1.3.2.1 -> 1.3.3]
-    ## - prettyunits     [1.1.1 -> 1.2.0]
-    ## - RcppArmadillo   [0.12.6.3.0 -> 0.12.6.4.0]
-    ## - rmarkdown       [2.24 -> 2.25]
-    ## - survival        [3.5-7 -> 3.5-5]
-    ## - pkgbuild        [* -> 1.4.2]
-    ## 
-    ## - Lockfile written to "~/GitHub/BBT4206-R-Lab2of15-ExploratoryDataAnalysis-avengers/renv.lock".
+    ## - The lockfile is already up to date.
 
 **etc.** as per the lab submission requirements.
