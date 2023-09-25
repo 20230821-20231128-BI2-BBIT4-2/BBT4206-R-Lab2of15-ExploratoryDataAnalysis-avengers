@@ -151,14 +151,17 @@ student_performance_dataset_mode <- names(table(student_performance_dataset$`EXA
 ]
 print(student_performance_dataset_mode)
 ```
-Measures of Distribution/Dispersion/Spread/Scatter/Variability
+
+## Measures of Distribution/Dispersion/Spread/Scatter/Variability
 
 ```{r Your Seventh Code Chunk}
 summary(student_performance_dataset)
 ```
-Measure the variance
+
+### Measure the variance
 
 Describe the next code chunk here:
+
 ```{r Your Eighth Code Chunk}
 library(dplyr)
 library(tidyr)
@@ -171,31 +174,37 @@ variance_df <- numeric_columns %>%
 
 print(variance_df, n = Inf)
 ```
-Measure the standard deviation
+
+### Measure the standard deviation
 
 Describe the next code chunk here:
+
 ```{r Your Ninth Code Chunk}
 standard_deviation <- sd(student_performance_dataset$`CAT 2 (8%): x/100 x 100`, na.rm = TRUE)
 
 print(standard_deviation)
 ```
-Inferential Statistics
 
-Perform ANOVA
+# Inferential Statistics
+
+## Perform ANOVA
 
 Describe the next code chunk here:
+
 ```{r Your Tenth Code Chunk}
 student_performance_dataset_anova <- aov(`Project: (10%): x/30 x 100 TOTAL` ~ class_group + gender, data = student_performance_dataset)
 
 summary(student_performance_dataset_anova)
 ```
-Qualitative Data Analysis
 
-Univariate Plots
+# Qualitative Data Analysis
 
-Create Histograms
+## Univariate Plots
+
+### Create Histograms
 
 Describe the next code chunk here:
+
 ```{r Your Eleventh Code Chunk}
 quiz_score <- as.numeric(student_performance_dataset$`Quizzes and  Bonus Marks (7%): x/79 x 100 TOTAL`)
 lab_score <- as.numeric(student_performance_dataset$`Lab Work (7%) x/25 x 100`)
@@ -233,9 +242,11 @@ hist(course_score,
      breaks = 10)  
 
 ```
-Missingness Map
+
+### Missingness Map
 
 Describe the next code chunk here:
+
 ```{r Your Twelfth Code Chunk}
 if (!is.element("Amelia", installed.packages()[, 1])) {
   install.packages("Amelia", dependencies = TRUE)
@@ -245,11 +256,13 @@ require("Amelia")
 # Create a missing data pattern plot for student_performance_dataset
 missmap(student_performance_dataset, col = c("orange", "blue"), legend = TRUE)
 ```
-Multivariate Plots
 
-Create a Scatter Plot
+## Multivariate Plots
+
+### Create a Scatter Plot
 
 Describe the next code chunk here:
+
 ```{r Your Thirteenth Code Chunk}
 library(ggplot2)
 
