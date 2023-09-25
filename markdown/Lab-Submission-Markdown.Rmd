@@ -120,12 +120,36 @@ Describe the next code chunk here:
 dim(student_performance_dataset)
 ```
 
-## \<You Can Have a Sub-Title Here\>
+# Data Types 
+
+Describe the next code chunk here:
 
 ```{r Your Fourth Code Chunk}
-# Fill this with other R related code that will be executed when the R markdown
-# file is rendered using knitR
-library(readr)
+sapply(student_performance_dataset, class)
+
+```
+
+# Descriptive Statistics 
+
+## Measures of Frequency 
+
+Describe the next code chunk here:
+
+```{r Your Fifth Code Chunk}
+project_freq <- student_performance_dataset$`Project: Section 5-11: (50%) x/10`
+cbind(frequency = table(project_freq),
+    percentage = prop.table(table(project_freq)) * 100)
+```
+
+## Measures of Central Tendency 
+
+Describe the next code chunk here:
+
+```{r Your Fourth Code Chunk}
+student_performance_dataset_mode <- names(table(student_performance_dataset$`EXAM: x/60 (60%)`))[
+  which(table(student_performance_dataset$`EXAM: x/60 (60%)`) == max(table(student_performance_dataset$`EXAM: x/60 (60%)`)))
+]
+print(student_performance_dataset_mode)
 ```
 
 ```{r Your Fourth Code Chunk}
