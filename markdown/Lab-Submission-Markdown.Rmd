@@ -120,18 +120,147 @@ Describe the next code chunk here:
 dim(student_performance_dataset)
 ```
 
-## \<You Can Have a Sub-Title Here\>
+# Data Types
+
+Describe the next code chunk here:
 
 ```{r Your Fourth Code Chunk}
-# Fill this with other R related code that will be executed when the R markdown
-# file is rendered using knitR
-library(readr)
+sapply(student_performance_dataset, class)
+
 ```
 
-```{r Your Fourth Code Chunk}
-# Fill this with other R related code that will be executed when the R markdown
-# file is rendered using knitR
-library(readr)
+# Descriptive Statistics
+
+## Measures of Frequency
+
+Describe the next code chunk here:
+
+```{r Your Fifth Code Chunk}
+project_freq <- student_performance_dataset$`Project: Section 5-11: (50%) x/10`
+cbind(frequency = table(project_freq),
+    percentage = prop.table(table(project_freq)) * 100)
+```
+
+## Measures of Central Tendency
+
+Describe the next code chunk here:
+
+```{r Your Sixth Code Chunk}
+student_performance_dataset_mode <- names(table(student_performance_dataset$`EXAM: x/60 (60%)`))[
+  which(table(student_performance_dataset$`EXAM: x/60 (60%)`) == max(table(student_performance_dataset$`EXAM: x/60 (60%)`)))
+]
+print(student_performance_dataset_mode)
+```
+Measures of Distribution/Dispersion/Spread/Scatter/Variability
+
+```{r Your Seventh Code Chunk}
+summary(student_performance_dataset)
+```
+Measure the variance
+
+Describe the next code chunk here:
+```{r Your Eighth Code Chunk}
+library(dplyr)
+library(tidyr)
+numeric_columns <- student_performance_dataset %>%
+  select_if(is.numeric)
+
+variance_df <- numeric_columns %>%
+  summarise_all(~ var(., na.rm = TRUE)) %>%
+  pivot_longer(everything(), names_to = "Column", values_to = "Variance")
+
+print(variance_df, n = Inf)
+```
+Measure the standard deviation
+
+Describe the next code chunk here:
+```{r Your Ninth Code Chunk}
+standard_deviation <- sd(student_performance_dataset$`CAT 2 (8%): x/100 x 100`, na.rm = TRUE)
+
+print(standard_deviation)
+```
+Inferential Statistics
+
+Perform ANOVA
+
+Describe the next code chunk here:
+```{r Your Tenth Code Chunk}
+student_performance_dataset_anova <- aov(`Project: (10%): x/30 x 100 TOTAL` ~ class_group + gender, data = student_performance_dataset)
+
+summary(student_performance_dataset_anova)
+```
+Qualitative Data Analysis
+
+Univariate Plots
+
+Create Histograms
+
+Describe the next code chunk here:
+```{r Your Eleventh Code Chunk}
+quiz_score <- as.numeric(student_performance_dataset$`Quizzes and  Bonus Marks (7%): x/79 x 100 TOTAL`)
+lab_score <- as.numeric(student_performance_dataset$`Lab Work (7%) x/25 x 100`)
+course_score <- as.numeric(student_performance_dataset$`Coursework TOTAL: x/40 (40%)`)
+
+course_score <- course_score[!is.na(course_score)]
+
+par(mfrow = c(2, 2))
+
+# Create a histogram for quiz score
+hist(quiz_score,
+     main = "Histogram of Project Scores",
+     xlab = "Project Scores",
+     ylab = "Frequency",
+     col = "violet",  
+     border = "black",  
+     breaks = 10)
+
+# Create a histogram for lab score
+hist(lab_score,
+     main = "Histogram of Exam Scores",
+     xlab = "Exam Scores",
+     ylab = "Frequency",
+     col = "brown",  
+     border = "black",  
+     breaks = 10)
+
+# Create a histogram for course scores (after removing missing values)
+hist(course_score,
+     main = "Histogram of Quiz Scores",
+     xlab = "Quiz Scores",
+     ylab = "Frequency",
+     col = "red",  
+     border = "black",  
+     breaks = 10)  
+
+```
+Missingness Map
+
+Describe the next code chunk here:
+```{r Your Twelfth Code Chunk}
+if (!is.element("Amelia", installed.packages()[, 1])) {
+  install.packages("Amelia", dependencies = TRUE)
+}
+require("Amelia")
+
+# Create a missing data pattern plot for student_performance_dataset
+missmap(student_performance_dataset, col = c("orange", "blue"), legend = TRUE)
+```
+Multivariate Plots
+
+Create a Scatter Plot
+
+Describe the next code chunk here:
+```{r Your Thirteenth Code Chunk}
+library(ggplot2)
+
+ggplot(student_performance_dataset, aes(x = gender, y = `A - 1. I am enjoying the subject`)) +
+  geom_point() +
+  labs(x = "Gender", y = "A  1. I am enjoying the subject") +
+  ggtitle("Scatter Plot: Gender vs. I am enjoying the subject")
+```
+
+```{r Your Fourteenth Code Chunk}
+renv::snapshot()
 ```
 
 **etc.** as per the lab submission requirements.
