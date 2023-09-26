@@ -15,14 +15,27 @@ editor_options:
 
 # Student Details
 
-|                                                   |                                                                                            |
-|---------------------------------------------------|--------------------------------------------------------------------------------------------|
-| **Student ID Numbers and Names of Group Members** | \<list one student name and ID per line; you should be between 2 and 5 members per group\> |
-| **BBIT 4.2 Group**                                | \<either group A, B, or C\>                                                                |
-| **Course Code**                                   | BBT4206                                                                                    |
-| **Course Name**                                   | Business Intelligence II                                                                   |
-| **Program**                                       | Bachelor of Business Information Technology                                                |
-| **Semester Duration**                             | 21^st^ August 2023 to 28^th^ November 2023                                                 |
++---------------------------------------------------+---------------------------------------------+-------------------------+
+| **Student ID Numbers and Names of Group Members** | \<122147 Melvin Muhati                      | \<Melvin Muhati 122147  |
+|                                                   |                                             |                         |
+|                                                   | 121774 Kigen Tuwei                          | Kigen Tuwei 121774      |
+|                                                   |                                             |                         |
+|                                                   | 120578 Irvine Esikote                       | Irvine Esikote 120578   |
+|                                                   |                                             |                         |
+|                                                   | 135129 Glenn Wamae                          | Glenn Wamae 135129      |
+|                                                   |                                             |                         |
+|                                                   | 136396 Edgar Tsinanga\>                     | Edgar Tsinanga 136396\> |
++---------------------------------------------------+---------------------------------------------+-------------------------+
+| **BBIT 4.2 Group**                                | \<B\>                                       |                         |
++---------------------------------------------------+---------------------------------------------+-------------------------+
+| **Course Code**                                   | BBT4206                                     |                         |
++---------------------------------------------------+---------------------------------------------+-------------------------+
+| **Course Name**                                   | Business Intelligence II                    |                         |
++---------------------------------------------------+---------------------------------------------+-------------------------+
+| **Program**                                       | Bachelor of Business Information Technology |                         |
++---------------------------------------------------+---------------------------------------------+-------------------------+
+| **Semester Duration**                             | 21^st^ August 2023 to 28^th^ November 2023  |                         |
++---------------------------------------------------+---------------------------------------------+-------------------------+
 
 # Setup Chunk
 
@@ -49,30 +62,246 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, eval = TRUE,
                       collapse = FALSE, tidy = TRUE)
 ```
 
-# \<Provide an Appropriate Title Here\>
+# Loading Dataset
 
 Describe the code chunk here:
 
+The R code snippet serves the purpose of reading a CSV file named "StudentPerformance.csv" and structuring its data within the R environment. To achieve this, it utilizes the readr package, which is known for its efficient and user-friendly data import functions. The code specifies the data types of each column, ensuring that factors, date formats, and numeric values are appropriately recognized. This is crucial for maintaining the integrity of the dataset and enabling accurate data analysis. Additionally, the code sets the locale for character encoding and numeric conventions. The resulting dataset, named "student_performance_dataset," is thus a well-organized and correctly typed representation of the information contained in the CSV file, ready for further data analysis and manipulation in R.One has to ensure that the CSV file is located in the expected directory or provide the full file path for accurate execution.
+
 ```{r Your Second Code Chunk}
-# Fill this with R related code that will be executed when the R markdown file
-# is rendered using knitR
+
+install.packages("readr")
 library(readr)
+
+student_performance_dataset <- readr::read_csv("data/StudentPerformance.csv",
+    col_types = readr::cols(class_group = readr::col_factor(levels = c("A", "B",
+        "C")), gender = readr::col_factor(levels = c("1", "0")), YOB = readr::col_date(format = "%Y"),
+        regret_choosing_bi = readr::col_factor(levels = c("1", "0")), drop_bi_now = readr::col_factor(levels = c("1",
+            "0")), motivator = readr::col_factor(levels = c("1", "0")), read_content_before_lecture = readr::col_factor(levels = c("1",
+            "2", "3", "4", "5")), anticipate_test_questions = readr::col_factor(levels = c("1",
+            "2", "3", "4", "5")), answer_rhetorical_questions = readr::col_factor(levels = c("1",
+            "2", "3", "4", "5")), find_terms_I_do_not_know = readr::col_factor(levels = c("1",
+            "2", "3", "4", "5")), copy_new_terms_in_reading_notebook = readr::col_factor(levels = c("1",
+            "2", "3", "4", "5")), take_quizzes_and_use_results = readr::col_factor(levels = c("1",
+            "2", "3", "4", "5")), reorganise_course_outline = readr::col_factor(levels = c("1",
+            "2", "3", "4", "5")), write_down_important_points = readr::col_factor(levels = c("1",
+            "2", "3", "4", "5")), space_out_revision = readr::col_factor(levels = c("1",
+            "2", "3", "4", "5")), studying_in_study_group = readr::col_factor(levels = c("1",
+            "2", "3", "4", "5")), schedule_appointments = readr::col_factor(levels = c("1",
+            "2", "3", "4", "5")), goal_oriented = readr::col_factor(levels = c("1",
+            "0")), spaced_repetition = readr::col_factor(levels = c("1", "2", "3",
+            "4")), testing_and_active_recall = readr::col_factor(levels = c("1",
+            "2", "3", "4")), interleaving = readr::col_factor(levels = c("1", "2",
+            "3", "4")), categorizing = readr::col_factor(levels = c("1", "2", "3",
+            "4")), retrospective_timetable = readr::col_factor(levels = c("1", "2",
+            "3", "4")), cornell_notes = readr::col_factor(levels = c("1", "2", "3",
+            "4")), sq3r = readr::col_factor(levels = c("1", "2", "3", "4")), commute = readr::col_factor(levels = c("1",
+            "2", "3", "4")), study_time = readr::col_factor(levels = c("1", "2",
+            "3", "4")), repeats_since_Y1 = readr::col_integer(), paid_tuition = readr::col_factor(levels = c("0",
+            "1")), free_tuition = readr::col_factor(levels = c("0", "1")), extra_curricular = readr::col_factor(levels = c("0",
+            "1")), sports_extra_curricular = readr::col_factor(levels = c("0", "1")),
+        exercise_per_week = readr::col_factor(levels = c("0", "1", "2", "3")), meditate = readr::col_factor(levels = c("0",
+            "1", "2", "3")), pray = readr::col_factor(levels = c("0", "1", "2", "3")),
+        internet = readr::col_factor(levels = c("0", "1")), laptop = readr::col_factor(levels = c("0",
+            "1")), family_relationships = readr::col_factor(levels = c("1", "2",
+            "3", "4", "5")), friendships = readr::col_factor(levels = c("1", "2",
+            "3", "4", "5")), romantic_relationships = readr::col_factor(levels = c("0",
+            "1", "2", "3", "4")), spiritual_wellnes = readr::col_factor(levels = c("1",
+            "2", "3", "4", "5")), financial_wellness = readr::col_factor(levels = c("1",
+            "2", "3", "4", "5")), health = readr::col_factor(levels = c("1", "2",
+            "3", "4", "5")), day_out = readr::col_factor(levels = c("0", "1", "2",
+            "3")), night_out = readr::col_factor(levels = c("0", "1", "2", "3")),
+        alcohol_or_narcotics = readr::col_factor(levels = c("0", "1", "2", "3")),
+        mentor = readr::col_factor(levels = c("0", "1")), mentor_meetings = readr::col_factor(levels = c("0",
+            "1", "2", "3")), `Attendance Waiver Granted: 1 = Yes, 0 = No` = readr::col_factor(levels = c("0",
+            "1")), GRADE = readr::col_factor(levels = c("A", "B", "C", "D", "E"))),
+    locale = readr::locale())
 ```
+
+# Dimensions
 
 Describe the next code chunk here:
 
+The R code chunk below serves the straightforward purpose of determining the dimensions of the "student_performance_dataset" data frame. By using the dim() function, it calculates the number of rows and columns in the dataset. The result is a vector with two values, where the first value signifies the total number of rows, and the second value represents the number of columns. This information is essential for gaining a quick overview of the dataset's size and structure, which is valuable for various data analysis and manipulation tasks, aiding in understanding the dataset's scope and organization.
+
 ```{r Your Third Code Chunk}
-# Fill this with other R related code that will be executed when the R markdown
-# file is rendered using knitR
-library(readr)
+dim(student_performance_dataset)
 ```
 
-## \<You Can Have a Sub-Title Here\>
+# Data Types
+
+Describe the next code chunk here:
+
+The R code chunk below is designed to extract and display the data types of each column within the "student_performance_dataset" data frame. It accomplishes this by utilizing the `sapply` function, which applies the `class()` function to every column in the data frame. The result is a vector that contains the data types of each column, offering a comprehensive overview of the underlying data structure. This information is valuable for ensuring that each column is of the correct data type, which is crucial for accurate data analysis and manipulation. It also aids in identifying the nature of the variables in the dataset, helping with variable selection and understanding the dataset's characteristics.
 
 ```{r Your Fourth Code Chunk}
-# Fill this with other R related code that will be executed when the R markdown
-# file is rendered using knitR
-library(readr)
+sapply(student_performance_dataset, class)
+
+```
+
+# Descriptive Statistics
+
+## Measures of Frequency
+
+Describe the next code chunk here:
+
+The R code chunk below conducts an analysis on a specific column, "Project: Section 5-11: (50%) x/10," within the "student_performance_dataset." It starts by extracting the values from this column and assigns them to the variable project_freq. Subsequently, the code computes both the frequency and percentage of each unique value in this column. The frequency is determined using the table() function, which counts how many times each value appears. The percentage is calculated by dividing the frequency of each value by the total count of values in the column and then multiplying by 100 to express it as a percentage. The results are then combined into a table that presents the frequency and percentage for each unique value. This analysis offers valuable insights into the distribution and importance of different values within the specified column, aiding in understanding the variability of data and its relevance within the dataset.
+
+```{r Your Fifth Code Chunk}
+project_freq <- student_performance_dataset$`Project: Section 5-11: (50%) x/10`
+cbind(frequency = table(project_freq),
+    percentage = prop.table(table(project_freq)) * 100)
+```
+
+## Measures of Central Tendency
+
+Describe the next code chunk here:
+
+The R code chunk below is designed to determine the mode, which is the most frequently occurring value, in a specific column of the "student_performance_dataset." It starts by computing the unique values in the column named "EXAM: x/60 (60%)" and extracts their names. Then, it compares the count of each unique value to the maximum count among all unique values in the column. By using the `which()` function, it identifies the value(s) that meet this condition, effectively pinpointing the mode(s). Finally, the code prints the mode value(s) to the console. This analysis is helpful in understanding which result or score is the most common in the "EXAM: x/60 (60%)" column, providing insights into the central tendency of this dataset.
+
+```{r Your Sixth Code Chunk}
+student_performance_dataset_mode <- names(table(student_performance_dataset$`EXAM: x/60 (60%)`))[
+  which(table(student_performance_dataset$`EXAM: x/60 (60%)`) == max(table(student_performance_dataset$`EXAM: x/60 (60%)`)))
+]
+print(student_performance_dataset_mode)
+```
+
+## Measures of Distribution/Dispersion/Spread/Scatter/Variability
+
+```{r Your Seventh Code Chunk}
+summary(student_performance_dataset)
+```
+
+### Measure the variance
+
+Describe the next code chunk here:
+
+The R code chunk below employs the `dplyr` and `tidyr` packages to perform a variance analysis on the numeric columns in the "student_performance_dataset." It first selects all the numeric columns and creates a new data frame called `numeric_columns`. Subsequently, it calculates the variance for each numeric column using the `var()` function, ensuring that missing values (NA) are handled by setting the `na.rm` parameter to `TRUE`. The results are then reshaped into a data frame called `variance_df`, with two columns: "Column," containing the names of the numeric columns, and "Variance," which holds the calculated variances. Finally, the code prints the `variance_df` to the console, presenting a summary of the variances for all numeric columns. This information is crucial for assessing the variability and dispersion of data within each numeric variable, aiding in the identification of columns with significant data variance and facilitating further data analysis.
+
+```{r Your Eighth Code Chunk}
+library(dplyr)
+library(tidyr)
+numeric_columns <- student_performance_dataset %>%
+  select_if(is.numeric)
+
+variance_df <- numeric_columns %>%
+  summarise_all(~ var(., na.rm = TRUE)) %>%
+  pivot_longer(everything(), names_to = "Column", values_to = "Variance")
+
+print(variance_df, n = Inf)
+```
+
+### Measure the standard deviation
+
+Describe the next code chunk here:
+
+The R code chunk below calculates and prints the standard deviation for the "CAT 2 (8%): x/100 x 100" column within the "student_performance_dataset." It utilizes the `sd()` function to compute the standard deviation, a statistical measure that quantifies the degree of variability or dispersion in a set of data. The `na.rm = TRUE` argument ensures that missing values (NAs) in the column are excluded from the calculation. By executing this code, you obtain a numerical result representing the standard deviation of the values in the specified column. This standard deviation value is crucial for assessing the spread and variability of data points within the "CAT 2 (8%): x/100 x 100" column, enabling a deeper understanding of the distribution of values and the level of deviation from the column's mean.
+
+```{r Your Ninth Code Chunk}
+standard_deviation <- sd(student_performance_dataset$`CAT 2 (8%): x/100 x 100`, na.rm = TRUE)
+
+print(standard_deviation)
+```
+
+# Inferential Statistics
+
+## Perform ANOVA
+
+Describe the next code chunk here:
+
+The R code chunk below conducts an Analysis of Variance (ANOVA) to evaluate the influence of two categorical variables, "class_group" and "gender," on the dependent variable "Project: (10%): x/30 x 100 TOTAL" within the "student_performance_dataset." The code uses the `aov()` function to build the ANOVA model, with the dependent variable on one side of the formula and the categorical independent variables on the other side. It then generates a summary of the ANOVA analysis with the `summary()` function, offering insights into the statistical significance of the effects of "class_group" and "gender" on the dependent variable. The summary includes crucial statistical measures such as F-statistics, p-values, and group means, aiding in the assessment of whether there are notable differences in the "Project: (10%): x/30 x 100 TOTAL" variable across various levels of "class_group" and "gender." ANOVA is a valuable statistical tool for exploring the relationships and impact of categorical variables on continuous outcomes, providing important insights into your dataset.
+
+```{r Your Tenth Code Chunk}
+student_performance_dataset_anova <- aov(`Project: (10%): x/30 x 100 TOTAL` ~ class_group + gender, data = student_performance_dataset)
+
+summary(student_performance_dataset_anova)
+```
+
+# Qualitative Data Analysis
+
+## Univariate Plots
+
+### Create Histograms
+
+Describe the next code chunk here:
+
+```{r Your Eleventh Code Chunk}
+quiz_score <- as.numeric(student_performance_dataset$`Quizzes and  Bonus Marks (7%): x/79 x 100 TOTAL`)
+lab_score <- as.numeric(student_performance_dataset$`Lab Work (7%) x/25 x 100`)
+course_score <- as.numeric(student_performance_dataset$`Coursework TOTAL: x/40 (40%)`)
+
+course_score <- course_score[!is.na(course_score)]
+
+par(mfrow = c(2, 2))
+
+# Create a histogram for quiz score
+hist(quiz_score,
+     main = "Histogram of Project Scores",
+     xlab = "Project Scores",
+     ylab = "Frequency",
+     col = "violet",  
+     border = "black",  
+     breaks = 10)
+
+# Create a histogram for lab score
+hist(lab_score,
+     main = "Histogram of Exam Scores",
+     xlab = "Exam Scores",
+     ylab = "Frequency",
+     col = "brown",  
+     border = "black",  
+     breaks = 10)
+
+# Create a histogram for course scores (after removing missing values)
+hist(course_score,
+     main = "Histogram of Quiz Scores",
+     xlab = "Quiz Scores",
+     ylab = "Frequency",
+     col = "red",  
+     border = "black",  
+     breaks = 10)  
+
+```
+
+### Missingness Map
+
+Describe the next code chunk here:
+
+The R code chunk checks if the "Amelia" package is installed in the R environment. Once the "Amelia" package is available, the code loads it into the current R session. "Amelia" is a package commonly used for handling missing data.
+
+The missmap() function is used to generate a missing data pattern plot for the "student_performance_dataset." This plot visually represents the presence of missing values in the dataset, with missing data points displayed in one color (orange) and observed data in another (blue).
+
+```{r Your Twelfth Code Chunk}
+if (!is.element("Amelia", installed.packages()[, 1])) {
+  install.packages("Amelia", dependencies = TRUE)
+}
+require("Amelia")
+
+# Create a missing data pattern plot for student_performance_dataset
+missmap(student_performance_dataset, col = c("orange", "blue"), legend = TRUE)
+```
+
+## Multivariate Plots
+
+### Create a Scatter Plot
+
+Describe the next code chunk here:
+
+The R code chunk below utilizes the `ggplot2` package to create a scatter plot that illustrates the relationship between the "gender" and "A - 1. I am enjoying the subject" variables within the "student_performance_dataset." The code begins by loading the `ggplot2` package for data visualization. It then constructs a scatter plot using the `ggplot()` function, mapping "gender" to the x-axis and "A - 1. I am enjoying the subject" to the y-axis. Each point on the scatter plot represents a student's response, with its position determined by their gender and the level of enjoyment reported. Labels are added to both axes, providing clarity to the plot, and a title is included for reference. This scatter plot offers a visual representation of the potential relationship between gender and students' enjoyment of the subject, making it easier to discern any patterns or trends within the dataset.
+
+```{r Your Thirteenth Code Chunk}
+library(ggplot2)
+
+ggplot(student_performance_dataset, aes(x = gender, y = `A - 1. I am enjoying the subject`)) +
+  geom_point() +
+  labs(x = "Gender", y = "A  1. I am enjoying the subject") +
+  ggtitle("Scatter Plot: Gender vs. I am enjoying the subject")
+```
+
+The R code chunk below utilizes the renv package to capture a snapshot of the current R project's environment.
+
+```{r Your Fourteenth Code Chunk}
+renv::snapshot()
 ```
 
 **etc.** as per the lab submission requirements.
